@@ -31,20 +31,61 @@ import dataset through SSMS
 
 
 review data before data cleaning, find out NULL value or N/A
+use [0023Orders]
+go
+
+--review the dataset
+
+--list total number of rows
+select COUNT(*)
+from [0023Orders]..[hotel booking]
+
+--list total number of columns
+SELECT count(*)
+FROM information_schema.columns
+WHERE table_name = 'hotel booking'
+
+SELECT *
+FROM information_schema.columns
+WHERE table_name = 'hotel booking'
+
+
+
+--list all data, find out NULL value
+select *
+from [0023Orders]..[hotel booking]
 
 
 
 
 
 data cleaning : Dropping "company" for being mostly null values and "arrival_date_week_number" for not being necessary.
-
+--delete column of company with mostly null values and "arrival_date_week_number" for not being necessary.
+ALTER TABLE [0023Orders]..[hotel booking]
+DROP COLUMN company, arrival_date_week_number
 
 
 data massaging: 
 Company has sizable missing values, while country, children, and agent have missing entries that can be replaced using the mode and median.Filling missing values for country using mode and filling the missing values of children and agent with the median.
+
 Creating an a full arrival date column.
+
+
+
 Adding a total guests column that includes adults and children.
+ALTER TABLE table_name
+ADD totalguest float
+
+
+
+
 Creating a dataframe to see monthly totals.
+
+
+
+
+
+
 
 
 Analysis 
