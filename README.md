@@ -114,14 +114,59 @@ group by arrival_date_month
 
 
 
-Analysis 
+Analysis （EDA: exploratory data analysis）vs DDA (descriptive data analysis)
+
+1. City hotels have around double the amount of reservations than resort hotels:(group by hotel, reservation count)
+
+select hotel, COUNT(*)
+from [0023Orders]..[hotel booking]
+group by hotel
 
 
+output:
+City Hotel	79330
+Resort Hotel	40060
 
 
+2. Both city and resort hotels reservations peak in August and the lowest in January. March through October seems to be their busiest window for the year. reservations fall in from November to January.
 
 
+--group by hotel, month 
+select hotel,arrival_date_month,  COUNT(*) as amount
+from [0023Orders]..[hotel booking]
+group by hotel, arrival_date_month
+order by hotel,amount 
+ 
+ 
+ 
+ output: 
+ 
+City Hotel	January	3736
+City Hotel	December	4132
+City Hotel	November	4357
+City Hotel	February	4965
+City Hotel	March	       6458
+City Hotel	September	7400
+City Hotel	April	       7480
+City Hotel	October	7605
+City Hotel	June	       7894
+City Hotel	July	       8088
+City Hotel	May	       8232
+City Hotel	August	       8983
+Resort Hotel	January	2193
+Resort Hotel	November	2437
+Resort Hotel	December	2648
+Resort Hotel	June	       3045
+Resort Hotel	February	3103
+Resort Hotel	September	3108
+Resort Hotel	March	       3336
+Resort Hotel	October	3555
+Resort Hotel	May	       3559
+Resort Hotel	April	       3609
+Resort Hotel	July	       4573
+Resort Hotel	August	       4894
 
 
+3. The vast majority of reservations have 2 adults followed by 1 adult.
 
 
