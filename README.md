@@ -73,11 +73,22 @@ Creating an a full arrival date column.
 
 
 Adding a total guests column that includes adults and children.
+
+
 ALTER TABLE table_name
 ADD totalguest int
 
 update [0023Orders]..[hotels booking]
 set totalguest = adults+children
+
+
+Alternative code: 
+
+alter table [0023Orders]..[hotel booking]
+ADD totalguest as (children + adults)
+
+
+
 
 Creating a dataframe to see monthly totals.
 
