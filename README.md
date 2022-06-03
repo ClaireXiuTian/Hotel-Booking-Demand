@@ -106,10 +106,11 @@ ADD totalguest as (children + adults)
 
 Creating a dataframe to see monthly totals.
 
+--create a dataframe monthlytotal group by month 
 
-
-
-
+select arrival_date_month, SUM(totalguest) as monthlytotal
+from [0023Orders]..[hotel booking]
+group by arrival_date_month
 
 
 
