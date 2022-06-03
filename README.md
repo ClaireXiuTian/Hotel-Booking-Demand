@@ -29,7 +29,7 @@ My recommendations would be to target couples during the spring, summer and part
 import dataset through SSMS 
 
 
-
+Data cleaning:
 review data before data cleaning, find out NULL value or N/A
 use [0023Orders]
 go
@@ -57,13 +57,16 @@ from [0023Orders]..[hotel booking]
 
 
 
-
-
 data cleaning : Dropping "company" for being mostly null values and "arrival_date_week_number" for not being necessary.
 --delete column of company with mostly null values and "arrival_date_week_number" for not being necessary.
 ALTER TABLE [0023Orders]..[hotel booking]
 DROP COLUMN company, arrival_date_week_number
 
+
+--delete rows where there is a NULL value: (how to find NULL values: use group by.eg: group by arrival_date_month)
+DELETE 
+FROM [0023Orders]..[hotel booking]
+WHERE arrival_date_month is NULL ;
 
 data massaging: 
 Company has sizable missing values, while country, children, and agent have missing entries that can be replaced using the mode and median.Filling missing values for country using mode and filling the missing values of children and agent with the median.
