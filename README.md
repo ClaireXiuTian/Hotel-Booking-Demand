@@ -74,12 +74,10 @@ Creating an a full arrival date column.
 
 Adding a total guests column that includes adults and children.
 ALTER TABLE table_name
-ADD totalguest float
+ADD totalguest int
 
-insert into [0023Orders]..[hotel booking] 
-              (totalguest)
-values ( 'select (children+adults) as totalguest
-from [0023Orders]..[hotel booking]')
+update [0023Orders]..[hotels booking]
+set totalguest = adults+children
 
 Creating a dataframe to see monthly totals.
 
