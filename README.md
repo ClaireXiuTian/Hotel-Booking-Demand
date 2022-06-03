@@ -51,7 +51,7 @@ WHERE table_name = 'hotel booking'
 
 
 
---list all data, find out NULL value
+--list all data, find out NULL value (group by is a good way to find NULL value)
 select *
 from [0023Orders]..[hotel booking]
 
@@ -169,4 +169,82 @@ Resort Hotel	August	       4894
 
 3. The vast majority of reservations have 2 adults followed by 1 adult.
 
+--group by adults
+
+select adults, COUNT(*) as number
+from [0023Orders]..[hotel booking]
+group by adults
+order by number desc
+
+output: 
+
+adults	number
+2	89680
+1	23027
+3	6202
+0	403
+4	62
+26	5
+5	2
+27	2
+20	2
+10	1
+50	1
+6	1
+40	1
+55	1
+
+
+4. the more than 90% of reservation are adults. One child is slightly larger in percentage than two children. (recognize NULL value again here in column of children)
+
+--group by children
+
+DELETE 
+FROM [0023Orders]..[hotel booking]
+ WHERE children is NULL
+
+select children, COUNT(*) as number
+from [0023Orders]..[hotel booking]
+group by children
+order by number desc
+
+
+output: 
+
+children	number
+0	       110796
+1	       4861
+2	       3652
+3	       76
+10	       1
+
+
+5. around 90% of reservation do not require a parking space.
+
+--group by required parking spaces 
+select required_car_parking_spaces, COUNT(*) number
+from [0023Orders]..[hotel booking]
+group by required_car_parking_spaces
+order by number desc
+
+
+output: 
+
+required_car_parking_spaces	 number
+0	                      111970
+1	                      7383
+2	                      28
+3	                      3
+8	                      2
+
+
+6. August 2016 saw a big spike in parking space requests. Could be a problem in the future if parking capacity is low.
+
+--group by month, read required parking spaces
+
+select arrival_date_year, arrival_date_month,required_car_parking_spaces, sum (COUNT(*)) as number
+from [0023Orders]..[hotel booking]
+group by arrival_date_month, arrival_date_year, required_car_parking_spaces
+having required_car_parking_spaces > 0
+order by arrival_date_year, arrival_date_month, number desc
 
