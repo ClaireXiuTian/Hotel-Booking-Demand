@@ -86,7 +86,7 @@ from [0023Orders]..[hotel booking]
 select CAST(arrival_date_year as char(4))+CAST (arrival_date_month as varchar(2))+CAST(arrival_date_day_of_month as varchar(2))
 from [0023Orders]..[hotel booking]
 
-Adding a total guests column that includes adults and children. (make sure data type is uniform)
+Adding a total guests column that includes adults and children. (make sure data type is uniform)(how to populate an aggregated data into a new column: we can use alter table add column, then update set the column; or we can direclty use alter table add column as (aggregation))
 
 
 ALTER TABLE table_name
