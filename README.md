@@ -68,11 +68,22 @@ DROP COLUMN company, arrival_date_week_number
 data massaging: 
 Company has sizable missing values, while country, children, and agent have missing entries that can be replaced using the mode and median.Filling missing values for country using mode and filling the missing values of children and agent with the median.
 
-Creating an a full arrival date column.
+Creating an a full arrival date column.(make sure data type is uniform)
 
 
+alter table [0023Orders]..[hotel booking]
+ADD arrivaldate as 
+(CAST(arrival_date_year as char(4))+CAST (arrival_date_month as varchar(2))+CAST(arrival_date_day_of_month as varchar(2)))
 
-Adding a total guests column that includes adults and children.
+
+validate data
+select arrivaldate
+from [0023Orders]..[hotel booking]
+
+select CAST(arrival_date_year as char(4))+CAST (arrival_date_month as varchar(2))+CAST(arrival_date_day_of_month as varchar(2))
+from [0023Orders]..[hotel booking]
+
+Adding a total guests column that includes adults and children. (make sure data type is uniform)
 
 
 ALTER TABLE table_name
