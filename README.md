@@ -245,15 +245,81 @@ required_car_parking_spaces	 number
 select arrival_date_year, arrival_date_month,sum (required_car_parking_spaces)as number
 from [0023Orders]..[hotel booking]
 group by arrival_date_year, arrival_date_month
-order by arrival_date_year, arrival_date_month, number desc
+order by arrival_date_year, number desc
 
 
 
 output: 
 
+arrival_date_year	arrival_date_month	number
+2015	October	250
+2015	August	248
+2015	December	231
+2015	July	216
+2015	September	215
+2015	November	192
+2016	August	451
+2016	October	380
+2016	July	376
+2016	March	357
+2016	May	334
+2016	September	332
+2016	April	319
+2016	June	314
+2016	December	271
+2016	February	267
+2016	November	265
+2016	January	209
+2017	April	314
+2017	August	301
+2017	June	295
+2017	January	282
+2017	May	280
+2017	July	277
+2017	March	246
+2017	February	242
 
 
 7. the Average Daily Rate measures the average rental revenue earned for an occupied room per day. This plot shows the monthly total for APR rises from around May to October then dips down again.
+
+--monthly total ADR, group by month, select sum (ADR)
+--change the month column data type into int from varchar
+
+select arrival_date_year, arrival_date_month, SUM(adr) as totalADR
+from [0023Orders]..[hotel booking]
+group by arrival_date_year, arrival_date_month
+order by arrival_date_year, datepart(mm,arrival_date_month+',1900')
+
+output: 
+
+arrival_date_year	arrival_date_month	totalADR
+2015	July	       271588.059999999
+2015	August	       411815.61
+2015	September	484902.64
+2015	October	391084.629999998
+2015	November	141757.79
+2015	December	216311.39
+2016	January	145597.69
+2016	February	272767.929999999
+2016	March	       381430.43
+2016	April	       482651.900000001
+2016	May	       528075.290000002
+2016	June	       566123.950000002
+2016	July	       573715.300000001
+2016	August	       723470.270000002
+2016	September	618959.160000001
+2016	October	589978.460000002
+2016	November	359605.179999998
+2016	December	333389.149999999
+2017	January	271574.110000001
+2017	February	320893.869999999
+2017	March	       408746.019999999
+2017	April	       630470.679999999
+2017	May	       753553.539999994
+2017	June	       710153.159999997
+2017	July	       759959.669999992
+2017	August	       808923.219999996
+
 
 
 Findings and Recommendations
