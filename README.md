@@ -238,13 +238,35 @@ required_car_parking_spaces	 number
 8	                      2
 
 
-6. August 2016 saw a big spike in parking space requests. Could be a problem in the future if parking capacity is low.
+6. August 2016 saw a big spike in parking space requests. Could be a problem in the future if parking capacity is low. （understand the business problem, know how to translate the business needs into query logics, use function of SUM or COUNT）
 
 --group by month, read required parking spaces
 
-select arrival_date_year, arrival_date_month,required_car_parking_spaces, sum (COUNT(*)) as number
+select arrival_date_year, arrival_date_month,sum (required_car_parking_spaces)as number
 from [0023Orders]..[hotel booking]
-group by arrival_date_month, arrival_date_year, required_car_parking_spaces
-having required_car_parking_spaces > 0
+group by arrival_date_year, arrival_date_month
 order by arrival_date_year, arrival_date_month, number desc
+
+
+
+output: 
+
+
+
+7. the Average Daily Rate measures the average rental revenue earned for an occupied room per day. This plot shows the monthly total for APR rises from around May to October then dips down again.
+
+
+Findings and Recommendations
+
+
+City hotels have around double the amount of reservations than resort hotels.
+Both city and resort hotels reservations peak in August are the lowest in January. March through October seems to be their busiest window for the year. reservations fall in from November to January.
+The vast majority of reservations have 2 adults followed by 1 adult.
+The more than 90% of reservation are adults. One child is slightly larger in percentage than two children.
+Around 90% of reservation do not require a parking space
+August 2016 saw a big spike in parking space requests. Could be a problem in the future if parking capacity is low.
+the Average Daily Rate measures the average rental revenue earned for an occupied room per day. This plot shows the monthly total for APR rises from around May to October then dips down again.
+My recommendations would be to target couples during the spring, summer and part of fall. Focus especially on the summer months as they bring in the best average daily rates. Resort hotels may have to increase their advertising efforts compared to city hotels. I would also make sure there are enough parking spaces during the summer months. With a surge of demand of spaces it would prudent to make sure that they have the capacity or a plan in place for any overflow.
+
+
 
